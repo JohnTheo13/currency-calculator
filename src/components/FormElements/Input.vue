@@ -1,5 +1,5 @@
 <template>
-  <div class="select-field">
+  <div class="input-field">
     <label :for="name">
       <i :class="faclass" />
       {{ title }} <!-- not all currencie in font awesome thus we keep title -->
@@ -30,8 +30,16 @@ const Input = Vue.extend({
 export default Input
 </script>
 
-<style scoped>
-i {
-  margin-right: 3px;
+<style lang="scss" scoped>
+.input-field {
+  position: relative;
+  width: 100%;
+  input {
+    width: 80%;
+    border-radius: 2px;
+  }
+  i {
+    margin-right: 3px;
+  }
 }
 </style>

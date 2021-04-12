@@ -30,3 +30,19 @@ const Select = Vue.extend({
 })
 export default Select
 </script>
+
+<style lang="scss" scoped>
+.select-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  select {
+    width: 80%;
+    align-self: center;
+    background: $secondary;
+    border-radius: 2px;
+  }
+}
+</style>

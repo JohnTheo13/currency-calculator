@@ -1,6 +1,13 @@
 <template>
   <div class="main-container">
-    <div class="fields-container">
+    <Input
+      name="base-input"
+      :amount="base"
+      @onChange="baseChange"
+      :title="top"
+      :faclass="`fa fa-${top.toLowerCase()}`"
+    />
+    <div class="select-container">
       <Select
         :title="this.t('base_select_title')"
         :selected="top"
@@ -8,15 +15,6 @@
         :options="currencies"
         @currencyChange="changed"
       />
-      <Input
-        name="base-input"
-        :amount="base"
-        @onChange="baseChange"
-        :title="top"
-        :faclass="`fa fa-${top.toLowerCase()}`"
-      />
-    </div>
-    <div class="fields-container">
       <Select
         :selected="bottom"
         name="bottom"
@@ -24,23 +22,24 @@
         :options="currencies"
         @currencyChange="changed"
       />
-      <Input
-        name="target-input"
-        :amount="target"
-        @onChange="targetChange"
-        :title="bottom"
-        :faclass="`fa fa-${bottom.toLowerCase()}`"
-      />
     </div>
+    <Input
+      name="target-input"
+      :amount="target"
+      @onChange="targetChange"
+      :title="bottom"
+      :faclass="`fa fa-${bottom.toLowerCase()}`"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Select from './Select.vue'
-import Input from './Input.vue'
-import { latest } from '../models/latest'
-import { Currency } from '../models/types'
+import Select from '../FormElements/Select.vue'
+import Input from '../FormElements/Input.vue'
+import { latest } from '../../models/latest'
+import { Currency } from '../../models/types'
+import './calculator.scss'
 
 interface State {
   // better naming needed
@@ -117,33 +116,6 @@ export default Calculator
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-.main-container {
-  max-width: 60%;
-  margin: auto;
-}
-.fields-container {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 8%;
-}
-select, input {
-  width: 100px;
-  height: 30px;
-  box-sizing: border-box;
-}
-
-.select-field {
-  display: flex;
-  flex-direction: column;
-}
-label {
-  align-self: flex-start;
-}
-
-@media only screen and (max-width: 756px){
-  .main-container {
-    max-width: 100%;
-  }
-}
+<style lang="scss">
+@import './calculator.scss';
 </style>

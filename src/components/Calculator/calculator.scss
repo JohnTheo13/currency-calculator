@@ -1,0 +1,24 @@
+.main-container {
+  max-width: 600px;
+  height: 300px;
+  border-radius: 4px;
+  margin: auto;
+  background-color: $primary;
+  padding: spacer(6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: relative;
+}
+.select-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+select,
+input {
+  width: 100px;
+  height: 30px;
+  box-sizing: border-box;
+}
