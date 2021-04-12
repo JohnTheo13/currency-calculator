@@ -2,34 +2,34 @@
   <div class="main-container">
     <div class="fields-container">
       <Select
-        v-bind:title="this.t('base_select_title')"
-        v-bind:selected="top"
+        :title="this.t('base_select_title')"
+        :selected="top"
         name="top"
-        v-bind:options="currencies"
-        v-on:currencyChange="changed"
+        :options="currencies"
+        @currencyChange="changed"
       />
       <Input
         name="base-input"
-        v-bind:amount="base"
+        :amount="base"
         @onChange="baseChange"
-        v-bind:title="top"
-        v-bind:faclass="`fa fa-${top.toLowerCase()}`"
+        :title="top"
+        :faclass="`fa fa-${top.toLowerCase()}`"
       />
     </div>
     <div class="fields-container">
       <Select
-        v-bind:selected="bottom"
+        :selected="bottom"
         name="bottom"
-        v-bind:title="this.t('target_select_title')"
-        v-bind:options="currencies"
-        v-on:currencyChange="changed"
+        :title="this.t('target_select_title')"
+        :options="currencies"
+        @currencyChange="changed"
       />
       <Input
         name="target-input"
-        v-bind:amount="target"
+        :amount="target"
         @onChange="targetChange"
-        v-bind:title="bottom"
-        v-bind:faclass="`fa fa-${bottom.toLowerCase()}`"
+        :title="bottom"
+        :faclass="`fa fa-${bottom.toLowerCase()}`"
       />
     </div>
   </div>
