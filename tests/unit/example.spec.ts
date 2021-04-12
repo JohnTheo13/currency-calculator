@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
 import Select from '@/components/Select.vue'
+// Minimum test example
 
 describe('Select.vue', () => {
   const props = {

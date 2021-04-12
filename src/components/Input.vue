@@ -1,6 +1,9 @@
 <template>
   <div class="select-field">
-    <label v-bind:for="name"><i :class="faclass" />{{ title }}</label>
+    <label v-bind:for="name">
+      <i :class="faclass" />
+      {{ title }} <!-- not all currencie in font awesome thus we keep title -->
+    </label>
     <input
       type="number"
       min="0"
@@ -14,7 +17,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-// import { latest } from '../models/latest'
 
 const Input = Vue.extend({
   props: {
@@ -27,3 +29,9 @@ const Input = Vue.extend({
 })
 export default Input
 </script>
+
+<style scoped>
+i {
+  margin-right: 3px;
+}
+</style>

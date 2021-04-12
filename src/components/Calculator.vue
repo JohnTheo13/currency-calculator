@@ -3,8 +3,8 @@
     <div class="fields-container">
       <Select
         v-bind:title="this.t('base_select_title')"
-        v-bind:selected="left"
-        name="left"
+        v-bind:selected="top"
+        name="top"
         v-bind:options="currencies"
         v-on:currencyChange="changed"
       />
@@ -12,14 +12,14 @@
         name="base-input"
         v-bind:amount="base"
         @onChange="baseChange"
-        v-bind:title="left"
-        v-bind:faclass="`fa fa-${left.toLowerCase()}`"
+        v-bind:title="top"
+        v-bind:faclass="`fa fa-${top.toLowerCase()}`"
       />
     </div>
     <div class="fields-container">
       <Select
-        v-bind:selected="right"
-        name="right"
+        v-bind:selected="bottom"
+        name="bottom"
         v-bind:title="this.t('target_select_title')"
         v-bind:options="currencies"
         v-on:currencyChange="changed"
@@ -28,8 +28,8 @@
         name="target-input"
         v-bind:amount="target"
         @onChange="targetChange"
-        v-bind:title="right"
-        v-bind:faclass="`fa fa-${right.toLowerCase()}`"
+        v-bind:title="bottom"
+        v-bind:faclass="`fa fa-${bottom.toLowerCase()}`"
       />
     </div>
   </div>
@@ -43,8 +43,9 @@ import { latest } from '../models/latest'
 import { Currency } from '../models/types'
 
 interface State {
-  left: Currency
-  right: Currency
+  // better naming needed
+  top: Currency
+  bottom: Currency
   currencies: string[]
   formula: Record<Currency, number> | null
   base: number
@@ -61,8 +62,8 @@ interface Event {
 const Calculator = Vue.extend({
   data (): State {
     return {
-      left: Currency.USD,
-      right: Currency.GBP,
+      top: Currency.USD,
+      bottom: Currency.GBP,
       currencies: [],
       formula: null,
       base: 1,
@@ -77,9 +78,9 @@ const Calculator = Vue.extend({
     async getFormula (currency: Currency = Currency.USD): Promise<void> {
       try {
         const { rates } = await latest(currency)
-        this.left = currency
+        this.top = currency
         this.formula = rates
-        this.target = parseFloat(rates[this.right].toFixed(3))
+        this.target = parseFloat(rates[this.bottom].toFixed(3))
         this.currencies = Object.keys(rates)
       } catch (error) {
         throw new Error(error)
@@ -89,23 +90,22 @@ const Calculator = Vue.extend({
       name,
       value
     }: {
-      name: 'right' | 'left'
+      name: 'top' | 'bottom'
       value: Currency
     }): void {
       this[name] = value
-      if (name === 'left') {
+      if (name === 'top') {
         this.getFormula(value)
       } else {
         this.target = parseFloat(this.formula[value].toFixed(3))
       }
     },
     baseChange ({ target: { value } }: Event): void {
-      const result = this.formula[this.right] * ((value as unknown) as number)
+      const result = this.formula[this.bottom] * ((value as unknown) as number)
       this.target = parseFloat(result.toFixed(3))
     },
     targetChange ({ target: { value } }: Event): void {
-      console.log(value)
-      const result = ((value as unknown) as number) / this.formula[this.right]
+      const result = ((value as unknown) as number) / this.formula[this.bottom]
       this.base = parseFloat(result.toFixed(3))
     }
   },
@@ -141,9 +141,6 @@ label {
   align-self: flex-start;
 }
 
-/* @media only screen (max-width: 756px) {
-  max-width: 100%;
-} */
 @media only screen and (max-width: 756px){
   .main-container {
     max-width: 100%;

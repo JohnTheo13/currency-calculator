@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-// import { latest } from '../models/latest'
 
 const Select = Vue.extend({
   props: {
